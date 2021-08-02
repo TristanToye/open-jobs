@@ -19,11 +19,14 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-        postgres:
-          image: postgres:13
-          ports: ["5432:5432"]
-          env:
-            POSTGRES_PASSWORD: password
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
 
     steps:
     - uses: actions/checkout@v2
