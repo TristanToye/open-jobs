@@ -56,7 +56,6 @@ jobs:
 
     - name: Setup Database
       run: |
-        cp config/GITHUB_ACTIONS_DATABASE.yml config/database.yml
         bundle exec rails db:setup
       env:
         DB_PASSWORD: password
