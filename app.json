@@ -1,0 +1,41 @@
+{
+  "name": "Open Jobs",
+  "description": "Opens source brand-able job boards & recruiting portals.",
+  "keywords": [
+    "rails",
+    "job search",
+    "recruiting"
+  ],
+  "repository": "https://github.com/TristanToye/open-jobs",
+  "scripts": {
+    "postdeploy": "bundle exec rails db:create && rails db:migrate"
+  },
+  "env": {
+    "RAILS_MASTER_KEY": {
+      "description": "Rails encryption for config/credentials.yml.enc",
+      "value": "REPLACE_ME"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "bundle exec rails test"
+      }
+    }
+  }
+}
