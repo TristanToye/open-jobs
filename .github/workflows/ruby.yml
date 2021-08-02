@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      postgres:
+      db:
         image: postgres:13
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
 
     steps:
@@ -54,12 +54,20 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
+    - name: Setup Database
+      run: |
+        cp config/GITHUB_ACTIONS_DATABASE.yml config/database.yml
+        bundle exec rails db:setup
+      env:
+        DB_PASSWORD: password
+        DB_USER: postgres
+        RAILS_ENV: test
+
     - name: Run Tests
       env:
-        PG_USER: postgres
-        PG_PASSWORD: password
+        DB_PASSWORD: password
+        DB_USER: postgres
         RAILS_ENV: test
       run: |
-        bin/rails db:setup
         # bundle exec rake test
         bundle exec rake --tasks
