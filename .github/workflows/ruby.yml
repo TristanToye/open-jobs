@@ -20,12 +20,13 @@ jobs:
 
     services:
       db:
-        image: postgres:13
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        image: postgres:12
         ports:
           - 5432:5432
         env:
           POSTGRES_PASSWORD: password
+          POSTGRES_USER: postgres
+          POSTGRES_DB: open_jobs_test
 
     steps:
     - uses: actions/checkout@v2
@@ -59,13 +60,13 @@ jobs:
         bundle exec rails db:setup
       env:
         DB_PASSWORD: password
-        DB_USER: postgres
+        DB_USERNAME: postgres
         RAILS_ENV: test
 
     - name: Run Tests
       env:
         DB_PASSWORD: password
-        DB_USER: postgres
+        DB_USERNAM: postgres
         RAILS_ENV: test
       run: |
         # bundle exec rake test
