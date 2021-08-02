@@ -26,7 +26,6 @@ jobs:
         env:
           POSTGRES_PASSWORD: password
           POSTGRES_USER: postgres
-          POSTGRES_DB: open_jobs_test
 
     steps:
     - uses: actions/checkout@v2
