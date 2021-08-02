@@ -21,7 +21,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  sslmode: require
+  sslmode: prefer
 
 development:
   <<: *default
@@ -62,7 +62,6 @@ test:
   database: open_jobs_test
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  sslmode: prefer
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -89,3 +88,4 @@ production:
   database: open_jobs_production
   username: open_jobs
   password: <%= ENV['OPEN_JOBS_DATABASE_PASSWORD'] %>
+  sslmode: require
